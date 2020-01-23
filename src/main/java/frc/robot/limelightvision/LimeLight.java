@@ -27,7 +27,7 @@ public class LimeLight extends SubsystemBase{
          * Using the Default Lime Light NT table
          */
         public LimeLight() {
-            m_tableName = "limelight";
+            m_tableName = "limelight-hyper";
             m_table = NetworkTableInstance.getDefault().getTable(m_tableName);
         }
     

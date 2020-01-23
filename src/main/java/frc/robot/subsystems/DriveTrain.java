@@ -50,9 +50,9 @@ private final SpeedController m_rightMotor =
   }
 
   public void log(){
-    SmartDashboard.getBoolean("TargetFound[tv]", getlimelight().getIsTargetFound());
-    SmartDashboard.getNumber("GetDegVertical[ty]", getlimelight().getdegVerticalToTarget());
-    SmartDashboard.getNumber("GetDegHorizontal[tx]", getlimelight().getdegRotationToTarget());
+    SmartDashboard.putBoolean("TargetFound[tv]", getlimelight().getIsTargetFound());
+    SmartDashboard.putNumber("GetDegVertical[ty]", getlimelight().getdegVerticalToTarget());
+    SmartDashboard.putNumber("GetDegHorizontal[tx]", getlimelight().getdegRotationToTarget());
   }
 
   @Override

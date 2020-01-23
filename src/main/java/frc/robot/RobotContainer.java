@@ -15,6 +15,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeControl;
 import frc.robot.commands.Autonomous;
 import frc.robot.commands.Drive_limeLight_Aim;
+import frc.robot.commands.Drive_limeLight_Aim_n_Range;
+import frc.robot.commands.Drive_limeLight_Range;
+import frc.robot.commands.Drive_limelight_Seeking;
 import frc.robot.subsystems.DriveTrain;
 
 
@@ -29,6 +32,9 @@ public class RobotContainer {
   private final DriveTrain m_drive = new DriveTrain();
 
   private final Drive_limeLight_Aim aim = new Drive_limeLight_Aim(m_drive);
+  private final Drive_limeLight_Range range = new Drive_limeLight_Range(m_drive);
+  private final Drive_limeLight_Aim_n_Range aim_range = new Drive_limeLight_Aim_n_Range(m_drive);
+  private final Drive_limelight_Seeking seeking = new Drive_limelight_Seeking(m_drive);
   private final CommandBase m_autonomousCommand = new Autonomous(m_drive);
 
   private final XboxController x_stick = new XboxController(0);
@@ -53,8 +59,14 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     final JoystickButton b_Button = new JoystickButton(x_stick, 2);
+    final JoystickButton a_Button = new JoystickButton(x_stick, 1);
+    final JoystickButton x_Button = new JoystickButton(x_stick, 3);
+    final JoystickButton y_Button = new JoystickButton(x_stick, 4);
 
     b_Button.whileHeld(aim);
+    a_Button.whileHeld(range);
+    x_Button.whileHeld(aim_range);
+    y_Button.whileHeld(seeking);
   }
 
 /**

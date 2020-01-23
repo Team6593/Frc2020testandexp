@@ -7,42 +7,37 @@
 
 package frc.robot.commands;
 
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
-public class Drive_limeLight_Aim extends CommandBase {
+public class Drive_limeLight_Range extends CommandBase {
   private DriveTrain drive;
-  private double kpAim = 0.05;
-  //private float min_command = 0.01f;
-  private double m_moveValue = 0;
-  private double m_rotateValue = 0;
-  
+  private double kpDistance = 0.5;
+  private double m_moveValue;
+  private double m_rotateValue;
   /**
-   * Creates a new Drive_limeLight_Aim.
+   * Creates a new Drive_limeLight_Range.
    */
-  public Drive_limeLight_Aim(DriveTrain d) {
+  public Drive_limeLight_Range(DriveTrain d) {
     drive = d;
+    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drive);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-  
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double tx = drive.getlimelight().getdegRotationToTarget();
+    double ty = drive.getlimelight().getdegVerticalToTarget();
     boolean targetfound = drive.getlimelight().getIsTargetFound();
-    //double steering_adjust = 0.0;
-    //double headerror = -tx;
 
     if(targetfound){
-      m_moveValue = 0;
-      m_rotateValue = tx * kpAim;
+      m_moveValue = ty * kpDistance;
+      m_rotateValue = 0;
     }else{
       m_moveValue = 0;
       m_rotateValue = 0;
@@ -50,26 +45,12 @@ public class Drive_limeLight_Aim extends CommandBase {
 
     drive.arcadedrive(m_moveValue, m_rotateValue);
 
-    
-      // if(tx > 1){
-      //   steering_adjust = kpAim*headerror - min_command;
-      // }
-      // else if (tx < 1){
-      //   steering_adjust = kpAim*headerror + min_command;
-      // }
-      // m_moveValue += steering_adjust;
-      // m_rotateValue -= steering_adjust;
-
-      // drive.tankdrive(m_moveValue, m_rotateValue);
-  
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     drive.arcadedrive(0, 0);
-    //drive.tankdrive(0, 0);
-    //drive.stopmotor();
   }
 
   // Returns true when the command should end.
@@ -77,5 +58,17 @@ public class Drive_limeLight_Aim extends CommandBase {
   public boolean isFinished() {
     return false;
   }
-  
+
+  /*
+  h1 =  The height of your camera above the floor.
+  h2 = the height of the target.
+  a1 = its mounting angle.
+  a2 = The limelight (or your vision system) can tell you the y angle to the target.
+  */
+  private double Estimated_Distance(double a2){
+    double h1 = 6.0;
+    double h2 = 36.0;
+    double a1 = 0.0;
+    return (h2-h1)/Math.tan(a1+a2);
+  }
 }
