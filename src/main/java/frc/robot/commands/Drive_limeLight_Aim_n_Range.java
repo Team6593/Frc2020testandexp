@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
+import frc.robot.limelightvision.ControlMode.LedMode;
 import frc.robot.subsystems.DriveTrain;
 
 public class Drive_limeLight_Aim_n_Range extends CommandBase {
@@ -29,6 +30,8 @@ public class Drive_limeLight_Aim_n_Range extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    drive.getlimelight().setLEDMode(LedMode.kforceOn);
+    drive.getlimelight().setPipeline(1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -43,7 +46,7 @@ public class Drive_limeLight_Aim_n_Range extends CommandBase {
       m_rotateValue = tx * kpAim;
     }else{
       m_moveValue = 0;
-      m_rotateValue = 0;
+      m_rotateValue = 0.7;
     }
 
     drive.arcadedrive(m_moveValue, m_rotateValue);
@@ -53,6 +56,7 @@ public class Drive_limeLight_Aim_n_Range extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     drive.arcadedrive(0, 0);
+    drive.getlimelight().setLEDMode(LedMode.kforceOff);
   }
 
   // Returns true when the command should end.

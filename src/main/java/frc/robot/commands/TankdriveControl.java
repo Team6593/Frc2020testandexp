@@ -7,56 +7,40 @@
 
 package frc.robot.commands;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
-import frc.robot.limelightvision.ControlMode.LedMode;
 import frc.robot.subsystems.DriveTrain;
 
-public class Drive_limelight_Seeking extends CommandBase {
-  /**
-   * Creates a new Drive_limelight_Seeking.
-   */
-
+public class TankdriveControl extends CommandBase {
   private DriveTrain drive;
-  private double kaim = 0.05;
-  
-
-
-  public Drive_limelight_Seeking(DriveTrain d) {
-    drive = d;
-    // Use addRequirements() here to declare subsystem dependencies.
+  private DoubleSupplier mleft;
+  private DoubleSupplier mright;
+  /**
+   * Creates a new TankdriveControl.
+   */
+  public TankdriveControl(DriveTrain d, DoubleSupplier s1, DoubleSupplier s2) {
+    d = drive;
+    mleft = s1;
+    mright = s2;
     addRequirements(drive);
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    drive.getlimelight().setLEDMode(LedMode.kforceOn);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    boolean tv = drive.getlimelight().getIsTargetFound();
-    double tx = drive.getlimelight().getdegRotationToTarget();
-
-    double m_rotateValue = 0.0;
-    double m_moveValue = 0.0;
-    if(tv == false){
-      m_rotateValue = 0.59;
-      m_moveValue = 0.0;
-    }else{
-      m_rotateValue = kaim * tx;
-      m_moveValue = 0.0;
-    }
-    drive.arcadedrive(m_moveValue, m_rotateValue);
+    drive.tankdrive(mleft.getAsDouble(), mright.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    drive.arcadedrive(0, 0);
-    drive.getlimelight().setLEDMode(LedMode.kforceOff);
   }
 
   // Returns true when the command should end.

@@ -33,6 +33,14 @@ private final SpeedController m_rightMotor =
 
   }
 
+  public void leftspeed(double s){
+    m_leftMotor.set(s);
+  }
+
+  public void rightspeed(double s){
+    m_rightMotor.set(s);
+  }
+
   public void arcadedrive(double movevalue, double rotatevalue){
     drive.arcadeDrive(movevalue, rotatevalue);
   }

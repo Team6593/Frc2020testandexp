@@ -8,55 +8,39 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
-import frc.robot.limelightvision.ControlMode.LedMode;
 import frc.robot.subsystems.DriveTrain;
 
-public class Drive_limelight_Seeking extends CommandBase {
-  /**
-   * Creates a new Drive_limelight_Seeking.
-   */
-
+public class testSpeedController extends CommandBase {
   private DriveTrain drive;
-  private double kaim = 0.05;
-  
-
-
-  public Drive_limelight_Seeking(DriveTrain d) {
-    drive = d;
-    // Use addRequirements() here to declare subsystem dependencies.
+  private double lspeed;
+  private double rspeed;
+  /**
+   * Creates a new testSpeedController.
+   */
+  public testSpeedController(DriveTrain d, double ls, double rs) {
+     drive = d;
+     lspeed = ls;
+     rspeed = rs;
     addRequirements(drive);
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    drive.getlimelight().setLEDMode(LedMode.kforceOn);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    boolean tv = drive.getlimelight().getIsTargetFound();
-    double tx = drive.getlimelight().getdegRotationToTarget();
-
-    double m_rotateValue = 0.0;
-    double m_moveValue = 0.0;
-    if(tv == false){
-      m_rotateValue = 0.59;
-      m_moveValue = 0.0;
-    }else{
-      m_rotateValue = kaim * tx;
-      m_moveValue = 0.0;
-    }
-    drive.arcadedrive(m_moveValue, m_rotateValue);
+    drive.leftspeed(lspeed);
+    drive.rightspeed(rspeed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    drive.arcadedrive(0, 0);
-    drive.getlimelight().setLEDMode(LedMode.kforceOff);
+    drive.stopmotor();
   }
 
   // Returns true when the command should end.

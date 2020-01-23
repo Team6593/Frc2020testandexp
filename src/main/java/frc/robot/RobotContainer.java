@@ -18,6 +18,7 @@ import frc.robot.commands.Drive_limeLight_Aim;
 import frc.robot.commands.Drive_limeLight_Aim_n_Range;
 import frc.robot.commands.Drive_limeLight_Range;
 import frc.robot.commands.Drive_limelight_Seeking;
+import frc.robot.commands.testSpeedController;
 import frc.robot.subsystems.DriveTrain;
 
 
@@ -35,6 +36,8 @@ public class RobotContainer {
   private final Drive_limeLight_Range range = new Drive_limeLight_Range(m_drive);
   private final Drive_limeLight_Aim_n_Range aim_range = new Drive_limeLight_Aim_n_Range(m_drive);
   private final Drive_limelight_Seeking seeking = new Drive_limelight_Seeking(m_drive);
+  private final testSpeedController left_right_test = new testSpeedController(m_drive, 0.5, 0);
+
   private final CommandBase m_autonomousCommand = new Autonomous(m_drive);
 
   private final XboxController x_stick = new XboxController(0);
@@ -45,6 +48,7 @@ public class RobotContainer {
    */
   public RobotContainer() {
     m_drive.setDefaultCommand(new ArcadeControl(m_drive, () -> x_stick.getRawAxis(1), () -> x_stick.getRawAxis(4)));
+   //s m_drive.setDefaultCommand(new TankdriveControl(m_drive, () -> x_stick.getRawAxis(1), () -> x_stick.getRawAxis(4)));
 
     m_drive.log();
     // Configure the button bindings
@@ -58,15 +62,17 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    final JoystickButton b_Button = new JoystickButton(x_stick, 2);
-    final JoystickButton a_Button = new JoystickButton(x_stick, 1);
-    final JoystickButton x_Button = new JoystickButton(x_stick, 3);
-    final JoystickButton y_Button = new JoystickButton(x_stick, 4);
+    final JoystickButton b_Button = new JoystickButton(x_stick, Constants.B_BUTTON);
+    final JoystickButton a_Button = new JoystickButton(x_stick, Constants.A_BUTTON);
+    final JoystickButton x_Button = new JoystickButton(x_stick, Constants.X_BUTTON);
+    final JoystickButton y_Button = new JoystickButton(x_stick, Constants.Y_BUTTON);
+    final JoystickButton LEFT_TRIGGER_BUTTON = new JoystickButton(x_stick, Constants.LEFT_TRIGGER_BUTTON);
 
     b_Button.whileHeld(aim);
     a_Button.whileHeld(range);
     x_Button.whileHeld(aim_range);
     y_Button.whileHeld(seeking);
+    LEFT_TRIGGER_BUTTON.whileHeld(left_right_test);
   }
 
 /**
