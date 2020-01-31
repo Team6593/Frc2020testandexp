@@ -7,6 +7,9 @@
 
 package frc.robot;
 
+import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 
 /**
@@ -20,6 +23,8 @@ import edu.wpi.first.wpilibj.XboxController;
  * wherever the constants are needed, to reduce verbosity.
  */
 public final class Constants {
+	public static final AHRS navx_gyro = new AHRS(SPI.Port.kMXP);
+
     public static final int LEFT_MOTOR_1_ID = 2;
 	public static final int LEFT_MOTOR_2_ID = 3;
 	public static final int RIGHT_MOTOR_1_ID = 0;

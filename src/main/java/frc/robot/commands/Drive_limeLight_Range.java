@@ -7,13 +7,14 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.limelightvision.ControlMode.LedMode;
 import frc.robot.subsystems.DriveTrain;
 
 public class Drive_limeLight_Range extends CommandBase {
   private DriveTrain drive;
-  private double kpDistance = 0.5;
+  private double kpDistance = 0.1;
   private double m_moveValue;
   private double m_rotateValue;
   /**
@@ -29,6 +30,7 @@ public class Drive_limeLight_Range extends CommandBase {
   @Override
   public void initialize() {
     drive.getlimelight().setLEDMode(LedMode.kforceOn);
+    //Timer.delay(1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -53,7 +55,7 @@ public class Drive_limeLight_Range extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     drive.arcadedrive(0, 0);
-    drive.getlimelight().setLEDMode(LedMode.kforceOff);
+    //drive.getlimelight().setLEDMode(LedMode.kforceOff);
   }
 
   // Returns true when the command should end.

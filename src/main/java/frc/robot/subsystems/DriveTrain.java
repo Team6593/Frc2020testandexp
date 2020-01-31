@@ -7,21 +7,23 @@
 
 package frc.robot.subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.limelightvision.LimeLight;
 
 public class DriveTrain extends SubsystemBase {
   private LimeLight _limelight = new LimeLight();
+  private AHRS gyro;
 
-  private final SpeedController m_leftMotor =
-  new SpeedControllerGroup(new Spark(2), new Spark(3));
-private final SpeedController m_rightMotor =
-  new SpeedControllerGroup(new Spark(0), new Spark(1));
+  private final SpeedController m_leftMotor = new SpeedControllerGroup(new Spark(Constants.LEFT_MOTOR_1_ID), new Spark(Constants.LEFT_MOTOR_2_ID));
+  private final SpeedController m_rightMotor = new SpeedControllerGroup(new Spark(Constants.RIGHT_MOTOR_1_ID), new Spark(Constants.RIGHT_MOTOR_2_ID));
 
   private final DifferentialDrive drive = new DifferentialDrive(m_leftMotor, m_rightMotor);
   /**
@@ -61,6 +63,8 @@ private final SpeedController m_rightMotor =
     SmartDashboard.putBoolean("TargetFound[tv]", getlimelight().getIsTargetFound());
     SmartDashboard.putNumber("GetDegVertical[ty]", getlimelight().getdegVerticalToTarget());
     SmartDashboard.putNumber("GetDegHorizontal[tx]", getlimelight().getdegRotationToTarget());
+    SmartDashboard.putNumber("LeftMotorSpeed", m_leftMotor.get());
+    SmartDashboard.putNumber("RightMotorSpeed", m_rightMotor.get());
   }
 
   @Override

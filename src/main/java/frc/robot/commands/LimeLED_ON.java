@@ -8,22 +8,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.limelightvision.ControlMode.LedMode;
 import frc.robot.subsystems.DriveTrain;
 
-public class testSpeedController extends CommandBase {
+public class LimeLED_ON extends CommandBase {
   private DriveTrain drive;
-  private double lspeed;
-  private double rspeed;
   /**
-   * Creates a new testSpeedController.
+   * Creates a new LimeLED_ON.
    */
-  public testSpeedController(DriveTrain d, double ls, double rs, double timeout) {
-     
+  public LimeLED_ON(DriveTrain d) {
     drive = d;
-     lspeed = ls;
-     rspeed = rs;
     addRequirements(drive);
-    //withTimeout(timeout);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -35,14 +30,13 @@ public class testSpeedController extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drive.leftspeed(lspeed);
-    drive.rightspeed(rspeed);
+    drive.getlimelight().setLEDMode(LedMode.kforceOn);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    drive.stopmotor();
+    drive.getlimelight().setLEDMode(LedMode.kforceOff);
   }
 
   // Returns true when the command should end.

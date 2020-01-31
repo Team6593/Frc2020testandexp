@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.limelightvision.ControlMode.LedMode;
@@ -15,7 +16,8 @@ import frc.robot.subsystems.DriveTrain;
 public class Drive_limeLight_Aim_n_Range extends CommandBase {
   private DriveTrain drive;
   private double kpAim = 0.05;
-  private double kpDistance = 0.09;
+  private double kpDistance = 0.12;
+  private double min = 0.05;
   private double m_moveValue;
   private double m_rotateValue;
   /**
@@ -25,6 +27,7 @@ public class Drive_limeLight_Aim_n_Range extends CommandBase {
     drive = d;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drive);
+    //withTimeout(2);
   }
 
   // Called when the command is initially scheduled.
@@ -32,6 +35,7 @@ public class Drive_limeLight_Aim_n_Range extends CommandBase {
   public void initialize() {
     drive.getlimelight().setLEDMode(LedMode.kforceOn);
     drive.getlimelight().setPipeline(1);
+   // Timer.delay(1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -43,10 +47,10 @@ public class Drive_limeLight_Aim_n_Range extends CommandBase {
     
     if(targetfound){
       m_moveValue = ty * kpDistance;
-      m_rotateValue = tx * kpAim;
+      m_rotateValue = tx * kpAim - min;
     }else{
       m_moveValue = 0;
-      m_rotateValue = 0.7;
+      m_rotateValue = 0.6;
     }
 
     drive.arcadedrive(m_moveValue, m_rotateValue);
@@ -56,7 +60,7 @@ public class Drive_limeLight_Aim_n_Range extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     drive.arcadedrive(0, 0);
-    drive.getlimelight().setLEDMode(LedMode.kforceOff);
+    drive.getlimelight().setLEDMode(LedMode.kforceOn);
   }
 
   // Returns true when the command should end.
