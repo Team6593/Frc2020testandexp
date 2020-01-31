@@ -27,7 +27,6 @@ public class Drive_limeLight_Aim_n_Range extends CommandBase {
     drive = d;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drive);
-    //withTimeout(2);
   }
 
   // Called when the command is initially scheduled.
