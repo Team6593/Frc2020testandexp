@@ -16,6 +16,7 @@ public class testSpeedController extends CommandBase {
   private double lspeed;
   private double rspeed;
   private double to;
+  static Timer t;
   /**
    * Creates a new testSpeedController.
    */
@@ -32,12 +33,14 @@ public class testSpeedController extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    t.reset();
+    t.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(Timer.getFPGATimestamp() != to){
+    if(t.get() != to){
       drive.leftspeed(lspeed);
       drive.rightspeed(rspeed);
     }
