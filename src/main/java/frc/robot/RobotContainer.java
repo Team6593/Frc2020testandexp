@@ -40,7 +40,7 @@ public class RobotContainer {
   private final Drive_limeLight_Aim_n_Range aim_range = new Drive_limeLight_Aim_n_Range(m_drive);
   private final Drive_limelight_Seeking seeking = new Drive_limelight_Seeking(m_drive);
   private final LimeLED_ON ledON = new LimeLED_ON(m_drive);
-  private final testSpeedController left_right_test = new testSpeedController(m_drive, 0.5, 0, 3);
+  private final testSpeedController left_right_test = new testSpeedController(m_drive, 0.5, 0.5, 3000);
 
   private final CommandBase m_autonomousCommand = new Autonomous(m_drive);
 
@@ -78,6 +78,7 @@ public class RobotContainer {
     x_Button.whileHeld(range);
     a_Button.whileHeld(aim_range);
     y_Button.whileHeld(seeking);
+
     LEFT_TRIGGER_BUTTON.whileHeld(left_right_test);
 
     right_small_Button.whenActive(ledON);

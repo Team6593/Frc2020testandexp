@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.XboxController;
  * wherever the constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
 	public static final AHRS navx_gyro = new AHRS(SPI.Port.kMXP);
 
     public static final int LEFT_MOTOR_1_ID = 2;

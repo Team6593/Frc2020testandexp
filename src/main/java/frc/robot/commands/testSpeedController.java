@@ -15,18 +15,18 @@ public class testSpeedController extends CommandBase {
   private DriveTrain drive;
   private double lspeed;
   private double rspeed;
-  private double to;
+  private long to;
   static Timer t;
+
   /**
    * Creates a new testSpeedController.
    */
-  public testSpeedController(DriveTrain d, double ls, double rs, double timeout) { 
-     drive = d;
-     lspeed = ls;
-     rspeed = rs;
-     to = timeout;
+  public testSpeedController(DriveTrain d, double ls, double rs, long timeout) {
+    drive = d;
+    lspeed = ls;
+    rspeed = rs;
+    to = timeout;
     addRequirements(drive);
-    //withTimeout(timeout);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -40,20 +40,25 @@ public class testSpeedController extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(t.get() != to){
-      drive.leftspeed(lspeed);
-      drive.rightspeed(rspeed);
+    drive.leftspeed(lspeed);
+    drive.rightspeed(rspeed);
+
+    try {
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
     }
-    else{
-      drive.leftspeed(0);
-      drive.rightspeed(0);
-    }
+
+    drive.leftspeed(0);
+    drive.rightspeed(0);
+    
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     drive.stopmotor();
+    t.stop();
   }
 
   // Returns true when the command should end.
