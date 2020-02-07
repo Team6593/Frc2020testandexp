@@ -14,12 +14,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeControl;
 import frc.robot.commands.Autonomous;
+import frc.robot.commands.DriveStraightAuto;
 import frc.robot.commands.Drive_limeLight_Aim;
 import frc.robot.commands.Drive_limeLight_Aim_n_Range;
 import frc.robot.commands.Drive_limeLight_Range;
 import frc.robot.commands.Drive_limelight_Seeking;
 import frc.robot.commands.LimeLED_ON;
-import frc.robot.commands.testSpeedController;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.NavX_Gyro;
 
@@ -40,7 +40,7 @@ public class RobotContainer {
   private final Drive_limeLight_Aim_n_Range aim_range = new Drive_limeLight_Aim_n_Range(m_drive);
   private final Drive_limelight_Seeking seeking = new Drive_limelight_Seeking(m_drive);
   private final LimeLED_ON ledON = new LimeLED_ON(m_drive);
-  private final testSpeedController left_right_test = new testSpeedController(m_drive, 0.5, 0.5, 3000);
+  private final DriveStraightAuto auto = new DriveStraightAuto(m_drive);
 
   private final CommandBase m_autonomousCommand = new Autonomous(m_drive);
 
@@ -79,7 +79,7 @@ public class RobotContainer {
     a_Button.whileHeld(aim_range);
     y_Button.whileHeld(seeking);
 
-    LEFT_TRIGGER_BUTTON.whileHeld(left_right_test);
+    LEFT_TRIGGER_BUTTON.whileHeld(auto);
 
     right_small_Button.whenActive(ledON);
     right_small_Button.cancelWhenActive(seeking);

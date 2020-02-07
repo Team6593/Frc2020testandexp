@@ -12,29 +12,24 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
 public class testSpeedController extends CommandBase {
-  private DriveTrain drive;
   private double lspeed;
   private double rspeed;
-  private long to;
   static Timer t;
+  DriveTrain drive = new DriveTrain();
 
   /**
    * Creates a new testSpeedController.
    */
-  public testSpeedController(DriveTrain d, double ls, double rs, long timeout) {
-    drive = d;
+  public testSpeedController(double ls, double rs) {
     lspeed = ls;
     rspeed = rs;
-    to = timeout;
-    addRequirements(drive);
+    addRequirements(drive); 
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    t.reset();
-    t.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -42,23 +37,12 @@ public class testSpeedController extends CommandBase {
   public void execute() {
     drive.leftspeed(lspeed);
     drive.rightspeed(rspeed);
-
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-
-    drive.leftspeed(0);
-    drive.rightspeed(0);
-    
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     drive.stopmotor();
-    t.stop();
   }
 
   // Returns true when the command should end.

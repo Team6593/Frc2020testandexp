@@ -14,20 +14,21 @@ import frc.robot.subsystems.DriveTrain;
 
 public class TankdriveControl extends CommandBase {
   private DriveTrain drive;
-  private DoubleSupplier mleft;
-  private DoubleSupplier mright;
+  private double mleft;
+  private double mright;
   /**
    * Creates a new TankdriveControl.
    */
-  public TankdriveControl(DriveTrain d, DoubleSupplier s1, DoubleSupplier s2) {
+  public TankdriveControl(DriveTrain d, double e, double f) {
     d = drive;
-    mleft = s1;
-    mright = s2;
+    mleft = e;
+    mright = f;
     addRequirements(drive);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
-  // Called when the command is initially scheduled.
+
+// Called when the command is initially scheduled.
   @Override
   public void initialize() {
   }
@@ -35,7 +36,7 @@ public class TankdriveControl extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drive.tankdrive(mleft.getAsDouble(), mright.getAsDouble());
+    drive.tankdrive(mleft, mright);
   }
 
   // Called once the command ends or is interrupted.
