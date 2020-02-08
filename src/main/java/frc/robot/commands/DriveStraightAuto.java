@@ -23,6 +23,6 @@ public class DriveStraightAuto extends ParallelRaceGroup {
   public DriveStraightAuto(DriveTrain drive) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(new TankdriveControl(drive, .5, .5).withTimeout(3));
+    super(new TankdriveControl(drive, .6, .7).withTimeout(3));
   }
 }

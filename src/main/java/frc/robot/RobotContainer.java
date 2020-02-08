@@ -79,7 +79,7 @@ public class RobotContainer {
     a_Button.whileHeld(aim_range);
     y_Button.whileHeld(seeking);
 
-    LEFT_TRIGGER_BUTTON.whileHeld(auto);
+    LEFT_TRIGGER_BUTTON.whenActive(auto);
 
     right_small_Button.whenActive(ledON);
     right_small_Button.cancelWhenActive(seeking);

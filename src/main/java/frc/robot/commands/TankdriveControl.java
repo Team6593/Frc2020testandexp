@@ -20,7 +20,7 @@ public class TankdriveControl extends CommandBase {
    * Creates a new TankdriveControl.
    */
   public TankdriveControl(DriveTrain d, double e, double f) {
-    d = drive;
+    drive = d;
     mleft = e;
     mright = f;
     addRequirements(drive);
@@ -42,6 +42,8 @@ public class TankdriveControl extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    drive.tankdrive(0, 0);
+    drive.stopmotor();
   }
 
   // Returns true when the command should end.

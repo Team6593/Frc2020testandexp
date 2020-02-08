@@ -30,8 +30,8 @@ public class DriveTrain extends SubsystemBase {
    * Creates a new DriveTrain.
    */
   public DriveTrain() {
-    drive.setExpiration(.5);
-    drive.setSafetyEnabled(false);
+    //drive.setExpiration(.5);
+   // drive.setSafetyEnabled(false);
 
   }
 
