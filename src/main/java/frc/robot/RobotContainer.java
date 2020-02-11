@@ -20,6 +20,8 @@ import frc.robot.commands.Drive_limeLight_Aim_n_Range;
 import frc.robot.commands.Drive_limeLight_Range;
 import frc.robot.commands.Drive_limelight_Seeking;
 import frc.robot.commands.LimeLED_ON;
+import frc.robot.subsystems.Cameras;
+import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.NavX_Gyro;
 
@@ -34,6 +36,8 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain m_drive = new DriveTrain();
   private final NavX_Gyro gyro = new NavX_Gyro();
+  private final Cameras cam = new Cameras();
+  private final ColorWheel rgbsub = new ColorWheel();
 
   private final Drive_limeLight_Aim aim = new Drive_limeLight_Aim(m_drive);
   private final Drive_limeLight_Range range = new Drive_limeLight_Range(m_drive);
@@ -56,6 +60,8 @@ public class RobotContainer {
 
     m_drive.log();
     gyro.log();
+
+    cam.log();
     // Configure the button bindings
     configureButtonBindings();
   }

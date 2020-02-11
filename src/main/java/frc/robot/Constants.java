@@ -9,6 +9,7 @@ package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 
@@ -49,4 +50,8 @@ public final class Constants {
 	public static final int RIGHT_SMALL_BUTTON = 8;
 	public static final int LEFT_JOYSTICK_BUTTON = 9;
 	public static final int RIGHT_JOYSTICK_BUTTON = 10;
+
+	public static final I2C.Port i2cPort = I2C.Port.kOnboard;
+
+	public static final int rgb_motor_ID = 4;
 }
