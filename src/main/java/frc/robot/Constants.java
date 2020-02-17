@@ -9,6 +9,8 @@ package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
@@ -27,10 +29,15 @@ public final class Constants {
 
 	public static final AHRS navx_gyro = new AHRS(SPI.Port.kMXP);
 
-    public static final int LEFT_MOTOR_1_ID = 2;
-	public static final int LEFT_MOTOR_2_ID = 3;
-	public static final int RIGHT_MOTOR_1_ID = 0;
-	public static final int RIGHT_MOTOR_2_ID = 1;
+    // public static final int LEFT_MOTOR_1_ID = 2;
+	// public static final int LEFT_MOTOR_2_ID = 3;
+	// public static final int RIGHT_MOTOR_1_ID = 0;
+	// public static final int RIGHT_MOTOR_2_ID = 1;
+
+	public static final int m_MasterLeftID = 3;
+	public static final int m_MasterRightID = 1;
+	public static final int m_SlaveLeftID = 4;
+	public static final int m_SlaveRightID = 2;
 
 	public static final int XBOX_PORT_ID = 0;
 	public static final XboxController XBOX_CONTROLLER = new XboxController(XBOX_PORT_ID);
@@ -53,5 +60,13 @@ public final class Constants {
 
 	public static final I2C.Port i2cPort = I2C.Port.kOnboard;
 
-	public static final int rgb_motor_ID = 4;
+	public static final int rgb_motor_ID = 0;
+
+	public static final DoubleSolenoid SHIFTER_SOLENOID = new DoubleSolenoid(0 , 0);
+
+	public static final DoubleSolenoid TTLeft_SOLENOID = new DoubleSolenoid(0 , 0);
+	public static final DoubleSolenoid TTRight_SOLENOID = new DoubleSolenoid(0 , 0);
+	public static final DoubleSolenoid TTRGB_SOLENOID = new DoubleSolenoid(0 , 0);
+
+	public static final Compressor COMPRESSOR = new Compressor();
 }

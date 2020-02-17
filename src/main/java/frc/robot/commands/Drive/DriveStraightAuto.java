@@ -4,8 +4,7 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
-package frc.robot.commands;
+package frc.robot.commands.Drive;
 
 import java.util.function.DoubleSupplier;
 

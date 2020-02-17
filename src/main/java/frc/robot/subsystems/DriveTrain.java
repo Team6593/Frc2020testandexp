@@ -9,9 +9,12 @@ package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PWMSparkMax;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -22,17 +25,27 @@ public class DriveTrain extends SubsystemBase {
   private LimeLight _limelight = new LimeLight();
   private AHRS gyro;
 
-  private final SpeedController m_leftMotor = new SpeedControllerGroup(new Spark(Constants.LEFT_MOTOR_1_ID), new Spark(Constants.LEFT_MOTOR_2_ID));
-  private final SpeedController m_rightMotor = new SpeedControllerGroup(new Spark(Constants.RIGHT_MOTOR_1_ID), new Spark(Constants.RIGHT_MOTOR_2_ID));
+  private final SpeedController m_leftMotor = new SpeedControllerGroup(new PWMSparkMax(Constants.m_MasterLeftID), new PWMSparkMax(Constants.m_SlaveLeftID));
+  private final SpeedController m_rightMotor = new SpeedControllerGroup(new PWMSparkMax(Constants.m_MasterRightID ), new PWMSparkMax(Constants.m_SlaveRightID));
 
   private final DifferentialDrive drive = new DifferentialDrive(m_leftMotor, m_rightMotor);
+  private final DoubleSolenoid shifter = Constants.SHIFTER_SOLENOID;
   /**
    * Creates a new DriveTrain.
    */
   public DriveTrain() {
-    //drive.setExpiration(.5);
-   // drive.setSafetyEnabled(false);
+    drive.setExpiration(.5);
+    drive.setSafetyEnabled(false);
+    gyro = Constants.navx_gyro;
 
+  }
+
+  public void highGear(){
+    shifter.set(Value.kForward);
+  }
+
+  public void lowGear(){
+    shifter.set(Value.kReverse);
   }
 
   public void leftspeed(double s){

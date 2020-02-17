@@ -5,30 +5,24 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
-
-import java.util.function.DoubleSupplier;
+package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
-public class TankdriveControl extends CommandBase {
-  private DriveTrain drive;
-  private double mleft;
-  private double mright;
+public class HighGear extends CommandBase {
   /**
-   * Creates a new TankdriveControl.
+   * Creates a new HighGear.
    */
-  public TankdriveControl(DriveTrain d, double e, double f) {
-    drive = d;
-    mleft = e;
-    mright = f;
-    addRequirements(drive);
+  private DriveTrain m_DriveTrain;
+  
+  public HighGear(DriveTrain drive) {
+    m_DriveTrain = drive;
+    addRequirements(m_DriveTrain);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
-
-// Called when the command is initially scheduled.
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
   }
@@ -36,14 +30,12 @@ public class TankdriveControl extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drive.tankdrive(mleft, mright);
+    m_DriveTrain.highGear();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    drive.tankdrive(0, 0);
-    drive.stopmotor();
   }
 
   // Returns true when the command should end.

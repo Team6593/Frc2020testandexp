@@ -5,58 +5,36 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.TurnTable;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
-import frc.robot.limelightvision.ControlMode.LedMode;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.ColorWheel;
 
-public class Drive_limelight_Seeking extends CommandBase {
+public class UnreachColorWheel extends CommandBase {
+  ColorWheel colorWheel;
   /**
-   * Creates a new Drive_limelight_Seeking.
+   * Creates a new UnreachColorWheel.
    */
-
-  private DriveTrain drive;
-  private double kaim = 0.05;
-  
-
-
-  public Drive_limelight_Seeking(DriveTrain d) {
-    drive = d;
+  public UnreachColorWheel(ColorWheel cw) {
+    colorWheel = cw;
+    addRequirements(colorWheel);
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(drive);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    drive.getlimelight().setLEDMode(LedMode.kforceOn);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    boolean tv = drive.getlimelight().getIsTargetFound();
-    double tx = drive.getlimelight().getdegRotationToTarget();
-
-    double m_rotateValue = 0.0;
-    double m_moveValue = 0.0;
-    if(tv == false){
-      m_rotateValue = 0.59;
-      m_moveValue = 0.0;
-    }else{
-      m_rotateValue = kaim * tx;
-      m_moveValue = 0.0;
-    }
-    drive.arcadedrive(m_moveValue, m_rotateValue);
+    colorWheel.unreachColorWheel();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    drive.arcadedrive(0, 0);
-    drive.getlimelight().setLEDMode(LedMode.kforceOff);
   }
 
   // Returns true when the command should end.

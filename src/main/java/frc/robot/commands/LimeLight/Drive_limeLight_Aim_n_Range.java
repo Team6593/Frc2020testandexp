@@ -5,22 +5,25 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.LimeLight;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.limelightvision.ControlMode.LedMode;
 import frc.robot.subsystems.DriveTrain;
 
-public class Drive_limeLight_Range extends CommandBase {
+public class Drive_limeLight_Aim_n_Range extends CommandBase {
   private DriveTrain drive;
-  private double kpDistance = 0.1;
+  private double kpAim = 0.05;
+  private double kpDistance = 0.12;
+  private double min = 0.05;
   private double m_moveValue;
   private double m_rotateValue;
   /**
-   * Creates a new Drive_limeLight_Range.
+   * Creates a new Drive_limeLight_Aim_n_Range.
    */
-  public Drive_limeLight_Range(DriveTrain d) {
+  public Drive_limeLight_Aim_n_Range(DriveTrain d) {
     drive = d;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drive);
@@ -30,32 +33,33 @@ public class Drive_limeLight_Range extends CommandBase {
   @Override
   public void initialize() {
     drive.getlimelight().setLEDMode(LedMode.kforceOn);
-    //Timer.delay(1);
+    drive.getlimelight().setPipeline(1);
+   // Timer.delay(1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    double tx = drive.getlimelight().getdegRotationToTarget();
     double ty = drive.getlimelight().getdegVerticalToTarget();
     boolean targetfound = drive.getlimelight().getIsTargetFound();
-
+    
     if(targetfound){
       m_moveValue = ty * kpDistance;
-      m_rotateValue = 0;
+      m_rotateValue = tx * kpAim - min;
     }else{
       m_moveValue = 0;
-      m_rotateValue = 0;
+      m_rotateValue = 0.6;
     }
 
     drive.arcadedrive(m_moveValue, m_rotateValue);
-
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     drive.arcadedrive(0, 0);
-    //drive.getlimelight().setLEDMode(LedMode.kforceOff);
+    drive.getlimelight().setLEDMode(LedMode.kforceOn);
   }
 
   // Returns true when the command should end.
@@ -64,12 +68,6 @@ public class Drive_limeLight_Range extends CommandBase {
     return false;
   }
 
-  /*
-  h1 =  The height of your camera above the floor.
-  h2 = the height of the target.
-  a1 = its mounting angle.
-  a2 = The limelight (or your vision system) can tell you the y angle to the target.
-  */
   private double Estimated_Distance(double a2){
     double h1 = 6.0;
     double h2 = 36.0;

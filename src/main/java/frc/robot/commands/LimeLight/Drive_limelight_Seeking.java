@@ -4,26 +4,26 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
-package frc.robot.commands;
-
+package frc.robot.commands.LimeLight;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.limelightvision.ControlMode.LedMode;
 import frc.robot.subsystems.DriveTrain;
 
-public class Drive_limeLight_Aim extends CommandBase {
-  private DriveTrain drive;
-  private double kpAim = 0.05;
-  //private float min_command = 0.01f;
-  private double m_moveValue = 0;
-  private double m_rotateValue = 0;
-  
+public class Drive_limelight_Seeking extends CommandBase {
   /**
-   * Creates a new Drive_limeLight_Aim.
+   * Creates a new Drive_limelight_Seeking.
    */
-  public Drive_limeLight_Aim(DriveTrain d) {
+
+  private DriveTrain drive;
+  private double kaim = 0.05;
+  
+
+
+  public Drive_limelight_Seeking(DriveTrain d) {
     drive = d;
+    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drive);
   }
 
@@ -31,48 +31,31 @@ public class Drive_limeLight_Aim extends CommandBase {
   @Override
   public void initialize() {
     drive.getlimelight().setLEDMode(LedMode.kforceOn);
-  
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    boolean tv = drive.getlimelight().getIsTargetFound();
     double tx = drive.getlimelight().getdegRotationToTarget();
-    boolean targetfound = drive.getlimelight().getIsTargetFound();
-    //double steering_adjust = 0.0;
-    //double headerror = -tx;
 
-    if(targetfound){
-      m_moveValue = 0;
-      m_rotateValue = tx * kpAim;
+    double m_rotateValue = 0.0;
+    double m_moveValue = 0.0;
+    if(tv == false){
+      m_rotateValue = 0.59;
+      m_moveValue = 0.0;
     }else{
-      m_moveValue = 0;
-      m_rotateValue = 0;
+      m_rotateValue = kaim * tx;
+      m_moveValue = 0.0;
     }
-
     drive.arcadedrive(m_moveValue, m_rotateValue);
-
-    
-      // if(tx > 1){
-      //   steering_adjust = kpAim*headerror - min_command;
-      // }
-      // else if (tx < 1){
-      //   steering_adjust = kpAim*headerror + min_command;
-      // }
-      // m_moveValue += steering_adjust;
-      // m_rotateValue -= steering_adjust;
-
-      // drive.tankdrive(m_moveValue, m_rotateValue);
-  
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    drive.getlimelight().setLEDMode(LedMode.kforceOff);
     drive.arcadedrive(0, 0);
-    //drive.tankdrive(0, 0);
-    //drive.stopmotor();
+    drive.getlimelight().setLEDMode(LedMode.kforceOff);
   }
 
   // Returns true when the command should end.
@@ -80,5 +63,4 @@ public class Drive_limeLight_Aim extends CommandBase {
   public boolean isFinished() {
     return false;
   }
-  
 }

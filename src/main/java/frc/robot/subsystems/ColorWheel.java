@@ -12,9 +12,13 @@ import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
 import com.revrobotics.ColorSensorV3.RawColor;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.PWMSparkMax;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -33,19 +37,37 @@ public class ColorWheel extends SubsystemBase {
   private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
   private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
-  public final Spark rgb_m = new Spark(Constants.rgb_motor_ID);
+  public final PWMSparkMax rgb_m = new PWMSparkMax(Constants.rgb_motor_ID);
+  public final DoubleSolenoid TTLeft = Constants.TTLeft_SOLENOID;
+  public final DoubleSolenoid TTRight = Constants.TTRight_SOLENOID;
+  public final DoubleSolenoid TT_RGB = Constants.TTRGB_SOLENOID;
 
-  public void start(double s){
+  public void start_rgbMotor(double s){
   rgb_m.set(s);
   }
 
-  public void back(double s){
+  public void back_rgbMotor(double s){
   rgb_m.set(-s);
   }
 
-  public void stop(){
+  public void stop_rgbMotor(){
   rgb_m.set(0);
   }
+
+  public void reachColorWheel(){
+    TTLeft.set(Value.kForward);
+    TTRight.set(Value.kForward);
+    TT_RGB.set(Value.kForward);
+  }
+
+  public void unreachColorWheel(){
+    TTLeft.set(Value.kReverse);
+    TTRight.set(Value.kReverse);
+    TT_RGB.set(Value.kReverse);
+  }
+
+
+
 
   public Boolean alogStartRotation(){
     double counter = 0;
@@ -65,18 +87,24 @@ public class ColorWheel extends SubsystemBase {
   }
 
   public Double countEachRotation(){
-      double counter = 0.0;
+      double counter = 0.0, temp = 0;
       Color detectedColor = colorSensorV3.getColor();
       ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
-      while(true)
+      while(counter < 10)
       {
         if(match.color == kBlueTarget)
         {
-          counter = counter + .5;
-      }
-        return counter;
+          counter += .5;
+        }
+        // if (counter == .5) {
+        //   temp = counter + .5;
+        // }
+
+        // return temp;
+        //System.out.println(counter);
       }
 
+      return counter; 
   }
 
   public ColorWheel() {
@@ -88,10 +116,36 @@ public class ColorWheel extends SubsystemBase {
 
   @Override
   public void periodic() {
-
-    alogStartRotation();
-    countEachRotation();
-
+  String gameData;
+  gameData = DriverStation.getInstance().getGameSpecificMessage();
+  if(gameData.length() > 0)
+  {
+    switch (gameData.charAt(0))
+    {
+      case 'B' :
+        //Blue case code
+        System.out.println("Blue is send");
+        break;
+      case 'G' :
+        //Green case code
+        System.out.println("Green is send");
+        break;
+      case 'R' :
+        //Red case code
+        System.out.println("Red is send");
+        break;
+      case 'Y' :
+        //Yellow case code
+        System.out.println("Yellow is send");
+        break;
+      default :
+        //This is corrupt data
+        System.out.println("Corrupt data is send");
+        break;
+    }
+  } else {
+    //Code for no data received yet
+  }
     Color detectedColor = colorSensorV3.getColor();
     RawColor rawColor = colorSensorV3.getRawColor();
 
@@ -123,7 +177,7 @@ public class ColorWheel extends SubsystemBase {
     SmartDashboard.putString("Detected Color", colorString);
     SmartDashboard.putNumber("IR", IR);
 
-    SmartDashboard.putBoolean("6R success", alogStartRotation());
+    //SmartDashboard.putBoolean("6R success", alogStartRotation());
     SmartDashboard.putNumber("Count Each Rotation", countEachRotation());
     
     /**
