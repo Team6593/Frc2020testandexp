@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
@@ -18,10 +11,6 @@ import frc.robot.Constants;
 public class NavX_Gyro extends SubsystemBase {
   private AHRS gyro;
 
-  /**
-	 * Checks if the gyro is calibrating
-	 * @return isCalibrating
-	 */
 	public boolean isCalibrating() {
     
 		return gyro.isCalibrating();
@@ -31,10 +20,6 @@ public class NavX_Gyro extends SubsystemBase {
 		gyro.zeroYaw();
 	}
 	
-	/**
-	 * Gets the gyro angle in degrees [-180, 180]
-	 * @return yaw
-	 */
 	public double getGyro() {
 		return gyro.getYaw();
 	}

@@ -5,26 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.ShootOut;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.ShootOut;
 
-public class testSpeedController extends CommandBase {
-  private double lspeed;
-  private double rspeed;
-  static Timer t;
-  DriveTrain drive = new DriveTrain();
-
+public class ShootOutStop extends CommandBase {
+  private ShootOut so = new ShootOut();
+  private double s = 0;
   /**
-   * Creates a new testSpeedController.
+   * Creates a new ShootOutStop.
    */
-  public testSpeedController(double ls, double rs) {
-    lspeed = ls;
-    rspeed = rs;
-    addRequirements(drive); 
+  public ShootOutStop(ShootOut shoot) {
     // Use addRequirements() here to declare subsystem dependencies.
+    so = shoot;
+    addRequirements(so);
   }
 
   // Called when the command is initially scheduled.
@@ -35,14 +30,13 @@ public class testSpeedController extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drive.leftspeed(lspeed);
-    drive.rightspeed(rspeed);
+    so.stop_rolling();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    drive.stopmotor();
+    so.stop_rolling();
   }
 
   // Returns true when the command should end.

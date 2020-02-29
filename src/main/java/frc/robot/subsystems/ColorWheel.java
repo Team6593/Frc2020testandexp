@@ -25,9 +25,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class ColorWheel extends SubsystemBase {
-  /**
-   * Creates a new ReadRGB.
-   */
+
   private final I2C.Port i2c = Constants.i2cPort;
   private final ColorSensorV3 colorSensorV3 = new ColorSensorV3(Constants.i2cPort);
   private final ColorMatch m_colorMatcher = new ColorMatch();
@@ -96,12 +94,7 @@ public class ColorWheel extends SubsystemBase {
         {
           counter += .5;
         }
-        // if (counter == .5) {
-        //   temp = counter + .5;
-        // }
 
-        // return temp;
-        //System.out.println(counter);
       }
 
       return counter; 

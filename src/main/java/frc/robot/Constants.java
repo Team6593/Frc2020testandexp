@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
@@ -15,30 +8,22 @@ import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 
-/**
- * The Constants class provides a convenient place for teams to hold robot-wide
- * numerical or boolean constants. This class should not be used for any other
- * purpose. All constants should be declared globally (i.e. public static). Do
- * not put anything functional in this class.
- *
- * <p>
- * It is advised to statically import this class (or one of its inner classes)
- * wherever the constants are needed, to reduce verbosity.
- */
 public final class Constants {
 
+	//GYRO
 	public static final AHRS navx_gyro = new AHRS(SPI.Port.kMXP);
 
-    // public static final int LEFT_MOTOR_1_ID = 2;
-	// public static final int LEFT_MOTOR_2_ID = 3;
-	// public static final int RIGHT_MOTOR_1_ID = 0;
-	// public static final int RIGHT_MOTOR_2_ID = 1;
-
+	//DRIVETRAIN PORT NUMBERS
 	public static final int m_MasterLeftID = 3;
 	public static final int m_MasterRightID = 1;
 	public static final int m_SlaveLeftID = 4;
 	public static final int m_SlaveRightID = 2;
 
+	//SHOOT OUT MOTOR PORT NUMBER
+	public static final int SHOOTOUT_ID = 0;
+
+
+	//XBOX BUTTON MAPPING
 	public static final int XBOX_PORT_ID = 0;
 	public static final XboxController XBOX_CONTROLLER = new XboxController(XBOX_PORT_ID);
 	public static final int L_X_AXIS = 0;
@@ -58,15 +43,20 @@ public final class Constants {
 	public static final int LEFT_JOYSTICK_BUTTON = 9;
 	public static final int RIGHT_JOYSTICK_BUTTON = 10;
 
+	// COLOR SENSOR PORT
 	public static final I2C.Port i2cPort = I2C.Port.kOnboard;
 
+	//COLOR SENSOR MOTOR
 	public static final int rgb_motor_ID = 0;
 
-	public static final DoubleSolenoid SHIFTER_SOLENOID = new DoubleSolenoid(0 , 0);
+	//COLOR SENSOR PISTONS 
+	public static final DoubleSolenoid TTLeft_SOLENOID = new DoubleSolenoid(2 , 3);
+	public static final DoubleSolenoid TTRight_SOLENOID = new DoubleSolenoid(4 , 5);
+	public static final DoubleSolenoid TTRGB_SOLENOID = new DoubleSolenoid(6 , 7);
+	
+	//SHIFTER
+	public static final DoubleSolenoid SHIFTER_SOLENOID = new DoubleSolenoid(0 , 1);
 
-	public static final DoubleSolenoid TTLeft_SOLENOID = new DoubleSolenoid(0 , 0);
-	public static final DoubleSolenoid TTRight_SOLENOID = new DoubleSolenoid(0 , 0);
-	public static final DoubleSolenoid TTRGB_SOLENOID = new DoubleSolenoid(0 , 0);
-
+	//COMPRESSOR
 	public static final Compressor COMPRESSOR = new Compressor();
 }

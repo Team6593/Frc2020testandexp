@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
@@ -22,6 +15,9 @@ import frc.robot.commands.LimeLight.Drive_limeLight_Aim_n_Range;
 import frc.robot.commands.LimeLight.Drive_limeLight_Range;
 import frc.robot.commands.LimeLight.Drive_limelight_Seeking;
 import frc.robot.commands.LimeLight.LimeLED_ON;
+import frc.robot.commands.ShootOut.ShootOutInverseRolling;
+import frc.robot.commands.ShootOut.ShootOutStartRolling;
+import frc.robot.commands.ShootOut.ShootOutStop;
 import frc.robot.commands.TurnTable.RGB_BackM;
 import frc.robot.commands.TurnTable.RGB_StartM;
 import frc.robot.commands.TurnTable.ReachColorWheel;
@@ -30,14 +26,8 @@ import frc.robot.subsystems.Cameras;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.NavX_Gyro;
+import frc.robot.subsystems.ShootOut;
 
-
-/**
- * This class is where the bulk of the robot should be declared.  Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls).  Instead, the structure of the robot
- * (including subsystems, commands, and button mappings) should be declared here.
- */
 public class RobotContainer {
   
   //SUBSYSTEMS
@@ -45,6 +35,7 @@ public class RobotContainer {
   private final NavX_Gyro gyro = new NavX_Gyro();
   private final Cameras cam = new Cameras();
   private final ColorWheel cw = new ColorWheel();
+  private final ShootOut so = new ShootOut();
 
 
   //LIMELIGHT
@@ -66,6 +57,10 @@ public class RobotContainer {
   private final ReachColorWheel reachColorWheel = new ReachColorWheel(cw);
   private final UnreachColorWheel unreachColorWheel = new UnreachColorWheel(cw);
 
+  //SHOOTOUT
+  private final ShootOutInverseRolling so_inverse = new ShootOutInverseRolling(so, -.5);
+  private final ShootOutStartRolling so_start = new ShootOutStartRolling(so, .5);
+  private final ShootOutStop so_stop = new ShootOutStop(so);
   
   //JOYSTICK
   private final XboxController x_stick = new XboxController(0);
@@ -81,14 +76,11 @@ public class RobotContainer {
    */
   public RobotContainer() {
     m_drive.setDefaultCommand(new ArcadeControl(m_drive, () -> x_stick.getRawAxis(1), () -> x_stick.getRawAxis(4)));
-   //s m_drive.setDefaultCommand(new TankdriveControl(m_drive, () -> x_stick.getRawAxis(1), () -> x_stick.getRawAxis(4)));
 
     m_drive.log();
     gyro.log();
-   // SmartDashboard.putBoolean("6r", rgbsub.alogStartRotation());
-   // SmartDashboard.putNumber("rotate", rgbsub.countEachRotation());
     cam.log();
-    // Configure the button bindings
+
     configureButtonBindings();
   }
 
@@ -110,24 +102,9 @@ public class RobotContainer {
      RIGHT_TIGGER_BUTTON.whenPressed(lowGear);
      x_Button.whenPressed(reachColorWheel);
      y_Button.whenPressed(unreachColorWheel);
-    // a_Button.whileHeld(aim_range);
-    // y_Button.whileHeld(seeking);
-
-    // LEFT_TRIGGER_BUTTON.whenActive(auto);
-
-    // right_small_Button.whenActive(ledON);
-    // right_small_Button.cancelWhenActive(seeking);
-    // right_small_Button.cancelWhenActive(aim);
-    // right_small_Button.cancelWhenActive(range);
-    // right_small_Button.cancelWhenActive(aim_range);
   
   }
 
-/**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
   public Command getAutonomousCommand() {
     return m_autonomousCommand;
   }
