@@ -10,6 +10,9 @@ import frc.robot.commands.Drive.ArcadeControl;
 import frc.robot.commands.Drive.DriveStraightAuto;
 import frc.robot.commands.Drive.HighGear;
 import frc.robot.commands.Drive.LowGear;
+import frc.robot.commands.IntakeRollers.LeftSide_highShoot;
+import frc.robot.commands.IntakeRollers.MainIntakeRollerSpin;
+import frc.robot.commands.IntakeRollers.RightSide_lowShoot;
 import frc.robot.commands.LimeLight.Drive_limeLight_Aim;
 import frc.robot.commands.LimeLight.Drive_limeLight_Aim_n_Range;
 import frc.robot.commands.LimeLight.Drive_limeLight_Range;
@@ -25,6 +28,7 @@ import frc.robot.commands.TurnTable.UnreachColorWheel;
 import frc.robot.subsystems.Cameras;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.IntakeRollers;
 import frc.robot.subsystems.NavX_Gyro;
 import frc.robot.subsystems.ShootOut;
 
@@ -34,8 +38,14 @@ public class RobotContainer {
   private final DriveTrain m_drive = new DriveTrain();
   private final NavX_Gyro gyro = new NavX_Gyro();
   private final Cameras cam = new Cameras();
-  private final ColorWheel cw = new ColorWheel();
+  //private final ColorWheel cw = new ColorWheel();
   private final ShootOut so = new ShootOut();
+  //private final IntakeRollers rollers = new IntakeRollers();
+
+  //ROLLERS MAIN, LEFT, RIGHT, Horizontal band
+  // private final MainIntakeRollerSpin mainintake = new MainIntakeRollerSpin(rollers, .5);
+  // private final LeftSide_highShoot leftsideHighShoot = new LeftSide_highShoot(rollers, .5, .5);
+  // private final RightSide_lowShoot rightSide_lowShoot = new RightSide_lowShoot(rollers, .5, .5);
 
 
   //LIMELIGHT
@@ -52,10 +62,10 @@ public class RobotContainer {
 
 
   //TURN TABLE
-  private final RGB_StartM rgb_StartM = new RGB_StartM(cw, .5);
-  private final RGB_BackM rgb_BackM = new RGB_BackM(cw, -.5);
-  private final ReachColorWheel reachColorWheel = new ReachColorWheel(cw);
-  private final UnreachColorWheel unreachColorWheel = new UnreachColorWheel(cw);
+  // private final RGB_StartM rgb_StartM = new RGB_StartM(cw, .5);
+  // private final RGB_BackM rgb_BackM = new RGB_BackM(cw, -.5);
+  // private final ReachColorWheel reachColorWheel = new ReachColorWheel(cw);
+  // private final UnreachColorWheel unreachColorWheel = new UnreachColorWheel(cw);
 
   //SHOOTOUT
   private final ShootOutInverseRolling so_inverse = new ShootOutInverseRolling(so, -.5);
@@ -66,7 +76,7 @@ public class RobotContainer {
   private final XboxController x_stick = new XboxController(0);
 
 
-  //SHIFTER
+  //SHIFTER TAKE CHANGE THE SPEED OF THE DRIVE TRAIN
   private final HighGear highGear = new HighGear(m_drive);
   private final LowGear lowGear = new LowGear(m_drive);
 
@@ -96,16 +106,16 @@ public class RobotContainer {
     final JoystickButton right_small_Button = new JoystickButton(x_stick, Constants.RIGHT_SMALL_BUTTON);
 
     //BUTTON MAPPING
-     a_Button.whileHeld(rgb_StartM);
-     b_Button.whileHeld(rgb_BackM);
-     LEFT_TRIGGER_BUTTON.whenPressed(highGear);
-     RIGHT_TIGGER_BUTTON.whenPressed(lowGear);
-     x_Button.whenPressed(reachColorWheel);
-     y_Button.whenPressed(unreachColorWheel);
+    //  a_Button.whileHeld(mainintake);
+    //  b_Button.whileHeld(rightSide_lowShoot);
+    // // LEFT_TRIGGER_BUTTON.whenPressed(highGear);
+    //  //RIGHT_TIGGER_BUTTON.whenPressed(lowGear);
+    //  x_Button.whenPressed(leftsideHighShoot);
+     //y_Button.whenPressed(unreachColorWheel);
   
   }
 
-  public Command getAutonomousCommand() {
-    return m_autonomousCommand;
-  }
+  // public Command getAutonomousCommand() {
+  //   return m_autonomousCommand;
+  // }
 }

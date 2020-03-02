@@ -7,9 +7,8 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-
 import edu.wpi.first.wpilibj.PWMSparkMax;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -17,7 +16,7 @@ public class ShootOut extends SubsystemBase {
   private final PWMSparkMax SO_Motor = new PWMSparkMax(Constants.SHOOTOUT_ID);
  // private final CANSparkMax SO_Motor = new CANSparkMax(Constants.SHOOTOUT_ID);
 
-  public void start_rolling (Double s){
+  public void start_rolling (double s){
     SO_Motor.setSpeed(s);
   }
 

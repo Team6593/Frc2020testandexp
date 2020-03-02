@@ -85,16 +85,15 @@ public class ColorWheel extends SubsystemBase {
   }
 
   public Double countEachRotation(){
-      double counter = 0.0, temp = 0;
       Color detectedColor = colorSensorV3.getColor();
       ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
-      while(counter < 10)
-      {
+      double counter = 0;
+      
+      for (int i = 0; i < 10; i++) {
         if(match.color == kBlueTarget)
         {
           counter += .5;
         }
-
       }
 
       return counter; 
