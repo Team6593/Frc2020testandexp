@@ -14,19 +14,19 @@ public final class Constants {
 	public static final AHRS navx_gyro = new AHRS(SPI.Port.kMXP);
 
 	//DRIVETRAIN PORT NUMBERS
-	public static final int m_MasterLeftID = 0;
-	public static final int m_MasterRightID = 1;
-	public static final int m_SlaveLeftID = 2;
-	public static final int m_SlaveRightID = 3;
+	public static final int m_MasterLeftID = 6;
+	public static final int m_MasterRightID = 7;
+	public static final int m_SlaveLeftID = 8;
+	public static final int m_SlaveRightID = 9;
 
 	//SHOOT OUT MOTOR PORT NUMBER
-	public static final int SHOOTOUT_ID = 9;
+	public static final int SHOOTOUT_ID = 0;
 
 	//ROLLERS INTAKE [ V(Main) ], LEFT [H V(Shorter)] AND RIGHT ROLLERS [H V(Longer)]
 	public static final int ROLLERS_V_INTAKE_MAIN_ID = 4;
-	public static final int ROLLERS_H_ID = 5;
-	public static final int RIGHT_HIGH_V_ROLLER_ID = 6;
-	public static final int LEFT_LOW_V_ROLLER_ID = 7;
+	public static final int ROLLERS_H_ID = 2;
+	public static final int RIGHT_HIGH_V_ROLLER_ID = 1;
+	public static final int LEFT_LOW_V_ROLLER_ID = 3;
 
 	//XBOX BUTTON MAPPING
 	public static final int XBOX_PORT_ID = 0;
@@ -52,7 +52,7 @@ public final class Constants {
 	public static final I2C.Port i2cPort = I2C.Port.kOnboard;
 
 	//COLOR SENSOR MOTOR
-	public static final int rgb_motor_ID = 0;
+	public static final int rgb_motor_ID = 8;
 
 	//COLOR SENSOR PISTONS 
 	public static final DoubleSolenoid TTLeft_SOLENOID = new DoubleSolenoid(2 , 3);

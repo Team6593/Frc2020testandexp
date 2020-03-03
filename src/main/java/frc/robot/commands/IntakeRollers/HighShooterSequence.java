@@ -5,22 +5,23 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.ShootOut;
+package frc.robot.commands.IntakeRollers;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.IntakeRollers;
 import frc.robot.subsystems.ShootOut;
 
-public class ShootOutStartRolling extends CommandBase {
+public class HighShooterSequence extends CommandBase {
+  private IntakeRollers intake = RobotContainer.getIntakeRollers();
   private ShootOut so = RobotContainer.getShootOut();
-  private double s = 0;
+
   /**
-   * Creates a new StartRolling.
+   * Creates a new HighShooterSequence.
    */
-  public ShootOutStartRolling(ShootOut shoot, double speed) {
-    so = shoot;
-    s = speed;
-    addRequirements(so);
+  public HighShooterSequence() {
+
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
@@ -31,13 +32,11 @@ public class ShootOutStartRolling extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    so.start_rolling(s);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    so.stop_rolling();
   }
 
   // Returns true when the command should end.

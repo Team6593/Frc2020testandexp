@@ -8,10 +8,11 @@
 package frc.robot.commands.ShootOut;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.ShootOut;
 
 public class ShootOutInverseRolling extends CommandBase {
-  private ShootOut so = new ShootOut();
+  private ShootOut so = RobotContainer.getShootOut();
   private double s = 0;
   /**
    * Creates a new StartRolling.

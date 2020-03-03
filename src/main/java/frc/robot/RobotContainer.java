@@ -39,12 +39,12 @@ public class RobotContainer {
   private final NavX_Gyro gyro = new NavX_Gyro();
   private final Cameras cam = new Cameras();
   //private final ColorWheel cw = new ColorWheel();
-  private final ShootOut so = new ShootOut();
-  //private final IntakeRollers rollers = new IntakeRollers();
+  private static final ShootOut so = new ShootOut();
+  private static final IntakeRollers rollers = new IntakeRollers();
 
   //ROLLERS MAIN, LEFT, RIGHT, Horizontal band
-  // private final MainIntakeRollerSpin mainintake = new MainIntakeRollerSpin(rollers, .5);
-  // private final LeftSide_highShoot leftsideHighShoot = new LeftSide_highShoot(rollers, .5, .5);
+   private final MainIntakeRollerSpin mainintake = new MainIntakeRollerSpin(rollers, .5);
+   private final LeftSide_highShoot leftsideHighShoot = new LeftSide_highShoot(rollers, .5, .5);
   // private final RightSide_lowShoot rightSide_lowShoot = new RightSide_lowShoot(rollers, .5, .5);
 
 
@@ -106,13 +106,15 @@ public class RobotContainer {
     final JoystickButton right_small_Button = new JoystickButton(x_stick, Constants.RIGHT_SMALL_BUTTON);
 
     //BUTTON MAPPING
-    //  a_Button.whileHeld(mainintake);
-    //  b_Button.whileHeld(rightSide_lowShoot);
-    // // LEFT_TRIGGER_BUTTON.whenPressed(highGear);
-    //  //RIGHT_TIGGER_BUTTON.whenPressed(lowGear);
-    //  x_Button.whenPressed(leftsideHighShoot);
-     //y_Button.whenPressed(unreachColorWheel);
+    
   
+  }
+  public static ShootOut getShootOut() {
+    return so;
+  }
+
+  public static IntakeRollers getIntakeRollers() {
+    return rollers;
   }
 
   // public Command getAutonomousCommand() {

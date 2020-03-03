@@ -8,10 +8,11 @@
 package frc.robot.commands.IntakeRollers;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.IntakeRollers;
 
 public class RightSide_lowShoot extends CommandBase {
-  private IntakeRollers intake = new IntakeRollers();
+  private IntakeRollers intake = RobotContainer.getIntakeRollers();
   private double vertspeed = 0;
   private double horspeed = 0;
   /**

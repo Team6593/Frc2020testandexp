@@ -15,7 +15,7 @@ import com.revrobotics.ColorSensorV3.RawColor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.PWMSparkMax;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -35,7 +35,7 @@ public class ColorWheel extends SubsystemBase {
   private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
   private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
-  public final PWMSparkMax rgb_m = new PWMSparkMax(Constants.rgb_motor_ID);
+  public final Spark rgb_m = new Spark(Constants.rgb_motor_ID);
   public final DoubleSolenoid TTLeft = Constants.TTLeft_SOLENOID;
   public final DoubleSolenoid TTRight = Constants.TTRight_SOLENOID;
   public final DoubleSolenoid TT_RGB = Constants.TTRGB_SOLENOID;
