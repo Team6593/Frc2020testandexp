@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PWMSparkMax;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -18,8 +19,8 @@ public class DriveTrain extends SubsystemBase {
   private LimeLight _limelight = new LimeLight();
   private AHRS gyro;
 
-  private final SpeedController m_leftMotor = new SpeedControllerGroup(new Spark(Constants.m_MasterLeftID), new Spark(Constants.m_SlaveLeftID));
-  private final SpeedController m_rightMotor = new SpeedControllerGroup(new Spark(Constants.m_MasterRightID ), new Spark(Constants.m_SlaveRightID));
+  private final SpeedController m_leftMotor = new SpeedControllerGroup(new PWMSparkMax(Constants.m_MasterLeftID), new PWMSparkMax(Constants.m_SlaveLeftID));
+  private final SpeedController m_rightMotor = new SpeedControllerGroup(new PWMSparkMax(Constants.m_MasterRightID ), new PWMSparkMax(Constants.m_SlaveRightID));
 
   private final DifferentialDrive drive = new DifferentialDrive(m_leftMotor, m_rightMotor);
   private final DoubleSolenoid shifter = Constants.SHIFTER_SOLENOID;

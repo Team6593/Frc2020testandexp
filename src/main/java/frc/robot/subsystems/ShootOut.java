@@ -14,7 +14,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class ShootOut extends SubsystemBase {
-  private final Spark SO_Motor = new Spark(Constants.SHOOTOUT_ID);
+  //private final Spark SO_Motor = new Spark(Constants.SHOOTOUT_ID);
+  private final PWMSparkMax SO_Motor = new PWMSparkMax(Constants.SHOOTOUT_ID);
+  
  // private final CANSparkMax SO_Motor = new CANSparkMax(Constants.SHOOTOUT_ID);
 
   public void start_rolling (double s){

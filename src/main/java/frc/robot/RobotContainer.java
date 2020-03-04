@@ -43,9 +43,9 @@ public class RobotContainer {
   private static final IntakeRollers rollers = new IntakeRollers();
 
   //ROLLERS MAIN, LEFT, RIGHT, Horizontal band
-   private final MainIntakeRollerSpin mainintake = new MainIntakeRollerSpin(rollers, .5);
-   private final LeftSide_highShoot leftsideHighShoot = new LeftSide_highShoot(rollers, .5, .5);
-  // private final RightSide_lowShoot rightSide_lowShoot = new RightSide_lowShoot(rollers, .5, .5);
+   private final MainIntakeRollerSpin mainintake = new MainIntakeRollerSpin(rollers, .7);
+   private final LeftSide_highShoot leftsideHighShoot = new LeftSide_highShoot(rollers, .5, .8);
+   private final RightSide_lowShoot rightSide_lowShoot = new RightSide_lowShoot(rollers, .5, -.8);
 
 
   //LIMELIGHT
@@ -54,6 +54,7 @@ public class RobotContainer {
   private final Drive_limeLight_Aim_n_Range aim_range = new Drive_limeLight_Aim_n_Range(m_drive);
   private final Drive_limelight_Seeking seeking = new Drive_limelight_Seeking(m_drive);
   private final LimeLED_ON ledON = new LimeLED_ON(m_drive);
+  
 
 
   //AUTONOMUS
@@ -102,11 +103,13 @@ public class RobotContainer {
     final JoystickButton x_Button = new JoystickButton(x_stick, Constants.X_BUTTON);
     final JoystickButton y_Button = new JoystickButton(x_stick, Constants.Y_BUTTON);
     final JoystickButton LEFT_TRIGGER_BUTTON = new JoystickButton(x_stick, Constants.LEFT_TRIGGER_BUTTON);
-    final JoystickButton RIGHT_TIGGER_BUTTON = new JoystickButton(x_stick, Constants.RIGHT_TRIGGER_BUTTON);
+    final JoystickButton RIGHT_TRIGGER_BUTTON = new JoystickButton(x_stick, Constants.RIGHT_TRIGGER_BUTTON);
     final JoystickButton right_small_Button = new JoystickButton(x_stick, Constants.RIGHT_SMALL_BUTTON);
 
     //BUTTON MAPPING
-    
+    a_Button.whileHeld(mainintake);
+    b_Button.whileHeld(rightSide_lowShoot);
+    x_Button.whileHeld(leftsideHighShoot);
   
   }
   public static ShootOut getShootOut() {

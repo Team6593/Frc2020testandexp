@@ -5,22 +5,15 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.IntakeRollers;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.IntakeRollers;
-import frc.robot.subsystems.ShootOut;
 
-public class HighShooterSequence extends CommandBase {
-  private IntakeRollers intake = RobotContainer.getIntakeRollers();
-  private ShootOut so = RobotContainer.getShootOut();
-
+public class HighShootSeq extends CommandBase {
   /**
-   * Creates a new HighShooterSequence.
+   * Creates a new HighShootSeq.
    */
-  public HighShooterSequence() {
-
+  public HighShootSeq() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

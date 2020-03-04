@@ -9,16 +9,17 @@ package frc.robot.subsystems;
 
 import com.revrobotics.SparkMax;
 
+import edu.wpi.first.wpilibj.PWMSparkMax;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class IntakeRollers extends SubsystemBase {
-  private final Spark Low_v_Intake;
-  private final Spark H_Band;
-  private final Spark High_v_Intake;
-  private final Spark Main_Intake;
+  private final PWMSparkMax Low_v_Intake;
+  private final PWMSparkMax H_Band;
+  private final PWMSparkMax High_v_Intake;
+  private final PWMSparkMax Main_Intake;
 
 
   // private final Spark Low_v_Intake = new Spark(Constants.LEFT_LOW_V_ROLLER_ID);
@@ -27,10 +28,10 @@ public class IntakeRollers extends SubsystemBase {
   // private final Spark Main_Intake = new Spark(Constants.ROLLERS_V_INTAKE_MAIN_ID);
 
   public IntakeRollers() {
-    Low_v_Intake = new Spark(Constants.LEFT_LOW_V_ROLLER_ID);
-    H_Band = new Spark(Constants.ROLLERS_H_ID);
-    High_v_Intake = new Spark(Constants.RIGHT_HIGH_V_ROLLER_ID);
-    Main_Intake = new Spark(Constants.ROLLERS_V_INTAKE_MAIN_ID);
+    Low_v_Intake = new PWMSparkMax(Constants.LEFT_LOW_V_ROLLER_ID);
+    H_Band = new PWMSparkMax(Constants.ROLLERS_H_ID);
+    High_v_Intake = new PWMSparkMax(Constants.RIGHT_HIGH_V_ROLLER_ID);
+    Main_Intake = new PWMSparkMax(Constants.ROLLERS_V_INTAKE_MAIN_ID);
   }
 
   public void mainIntake(double s){

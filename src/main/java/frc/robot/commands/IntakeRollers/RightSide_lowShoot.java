@@ -12,7 +12,7 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.IntakeRollers;
 
 public class RightSide_lowShoot extends CommandBase {
-  private IntakeRollers intake = RobotContainer.getIntakeRollers();
+  private IntakeRollers intake;
   private double vertspeed = 0;
   private double horspeed = 0;
   /**

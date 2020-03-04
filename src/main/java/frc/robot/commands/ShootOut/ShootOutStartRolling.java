@@ -12,7 +12,7 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.ShootOut;
 
 public class ShootOutStartRolling extends CommandBase {
-  private ShootOut so = RobotContainer.getShootOut();
+  private ShootOut so;
   private double s = 0;
   /**
    * Creates a new StartRolling.

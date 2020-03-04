@@ -14,10 +14,10 @@ public final class Constants {
 	public static final AHRS navx_gyro = new AHRS(SPI.Port.kMXP);
 
 	//DRIVETRAIN PORT NUMBERS
-	public static final int m_MasterLeftID = 6;
-	public static final int m_MasterRightID = 7;
+	public static final int m_MasterLeftID = 7;
+	public static final int m_MasterRightID = 5;
 	public static final int m_SlaveLeftID = 8;
-	public static final int m_SlaveRightID = 9;
+	public static final int m_SlaveRightID = 6;
 
 	//SHOOT OUT MOTOR PORT NUMBER
 	public static final int SHOOTOUT_ID = 0;
