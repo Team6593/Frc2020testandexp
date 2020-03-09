@@ -44,7 +44,7 @@ public class RobotContainer {
 
   //ROLLERS MAIN, LEFT, RIGHT, Horizontal band
    private final MainIntakeRollerSpin mainintake = new MainIntakeRollerSpin(rollers, .7);
-   private final LeftSide_highShoot leftsideHighShoot = new LeftSide_highShoot(rollers, .5, .8);
+   private final LeftSide_highShoot leftsideHighShoot = new LeftSide_highShoot(rollers, -.8, .5, 1);
    private final RightSide_lowShoot rightSide_lowShoot = new RightSide_lowShoot(rollers, .5, -.8);
 
 
@@ -69,8 +69,8 @@ public class RobotContainer {
   // private final UnreachColorWheel unreachColorWheel = new UnreachColorWheel(cw);
 
   //SHOOTOUT
-  private final ShootOutInverseRolling so_inverse = new ShootOutInverseRolling(so, -.5);
-  private final ShootOutStartRolling so_start = new ShootOutStartRolling(so, .5);
+  private final ShootOutInverseRolling so_inverse = new ShootOutInverseRolling(so, -.85);
+  private final ShootOutStartRolling so_start = new ShootOutStartRolling(so, 1);
   private final ShootOutStop so_stop = new ShootOutStop(so);
   
   //JOYSTICK
@@ -86,7 +86,7 @@ public class RobotContainer {
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    m_drive.setDefaultCommand(new ArcadeControl(m_drive, () -> x_stick.getRawAxis(1), () -> x_stick.getRawAxis(4)));
+    m_drive.setDefaultCommand(new ArcadeControl(x_stick ,m_drive, () -> x_stick.getRawAxis(1), () -> -x_stick.getRawAxis(4)));
 
     m_drive.log();
     gyro.log();
@@ -110,6 +110,8 @@ public class RobotContainer {
     a_Button.whileHeld(mainintake);
     b_Button.whileHeld(rightSide_lowShoot);
     x_Button.whileHeld(leftsideHighShoot);
+    RIGHT_TRIGGER_BUTTON.whileHeld(so_start);
+    LEFT_TRIGGER_BUTTON.whileHeld(so_inverse);
   
   }
   public static ShootOut getShootOut() {

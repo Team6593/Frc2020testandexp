@@ -5,28 +5,23 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.IntakeRollers;
+package frc.robot.commands.TurnTable;
 
-import edu.wpi.first.wpilibj.PWMSparkMax;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.IntakeRollers;
+import frc.robot.subsystems.ColorWheel;
 
-public class LeftSide_highShoot extends CommandBase {
-  private IntakeRollers intake;
-  private double vertspeed = 0;
-  private double horspeed = 0;
-  private double shootoutS;
+public class SpecficColorStop extends CommandBase {
+  ColorWheel colorWheel;
+  Color pickColor;
   /**
-   * Creates a new RightSide_lowShoot.
+   * Creates a new SpecficColorStop.
    */
-  public LeftSide_highShoot(IntakeRollers i, double verticleS, double horizontalS, double shootoutspeed) {
-    intake = i;
-    vertspeed = verticleS;
-    horspeed = horizontalS;
-    shootoutS = shootoutspeed;
-    addRequirements(intake);
-    // Use addRequirements() here to declare subsystem dependencies.
+  public SpecficColorStop(ColorWheel cw, Color c) {
+    colorWheel = cw;
+    pickColor = c;
+
+    addRequirements(colorWheel);
   }
 
   // Called when the command is initially scheduled.
@@ -37,22 +32,13 @@ public class LeftSide_highShoot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intake.soSetSpeed(shootoutS);
-    if(intake.getSo_Speed() == shootoutS){
-      intake.leftMec_highShoot(horspeed, vertspeed);
-    }
-    else
-    {
-      intake.leftMec_highShoot(horspeed -.1, vertspeed -.1);
-    }
-     
-    //intake.leftMec_highShoot(horspeed, vertspeed);
+    colorWheel.countEachRotation(pickColor);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intake.stopMainRoller();
+    colorWheel.stop_rgbMotor();
   }
 
   // Returns true when the command should end.

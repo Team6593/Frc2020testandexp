@@ -66,35 +66,32 @@ public class ColorWheel extends SubsystemBase {
 
 
 
-
-  public Boolean alogStartRotation(){
-    double counter = 0;
+  double count = 0;
+  public Boolean alogStartRotation(Color c){
     boolean done = false;
     Color detectedColor = colorSensorV3.getColor();
     ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
 
-    while(counter != 6){
-      if(match.color == kBlueTarget){
-      counter = counter + .5;
+    while(count != 6){
+      if(match.color == c){
+        count = count + .5;
       }
       }
-      if(counter == 6){
+      if(count == 6){
         done = true;
       }
     return done;
   }
 
-  public Double countEachRotation(){
+  double counter = 0;
+  public Double countEachRotation(Color c){
       Color detectedColor = colorSensorV3.getColor();
       ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
-      double counter = 0;
       
-      for (int i = 0; i < 10; i++) {
-        if(match.color == kBlueTarget)
+        if(match.color == c)
         {
-          counter += .5;
+          counter += 1;
         }
-      }
 
       return counter; 
   }
@@ -170,7 +167,7 @@ public class ColorWheel extends SubsystemBase {
     SmartDashboard.putNumber("IR", IR);
 
     //SmartDashboard.putBoolean("6R success", alogStartRotation());
-    SmartDashboard.putNumber("Count Each Rotation", countEachRotation());
+    SmartDashboard.putNumber("Count Each Rotation", countEachRotation(kBlueTarget));
     
     /**
      * The sensor returns a raw IR value of the infrared light detected.

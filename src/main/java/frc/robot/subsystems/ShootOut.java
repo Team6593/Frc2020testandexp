@@ -15,17 +15,16 @@ import frc.robot.Constants;
 
 public class ShootOut extends SubsystemBase {
   //private final Spark SO_Motor = new Spark(Constants.SHOOTOUT_ID);
-  private final PWMSparkMax SO_Motor = new PWMSparkMax(Constants.SHOOTOUT_ID);
+  private final Spark SO_Motor_high = new Spark(17);
   
  // private final CANSparkMax SO_Motor = new CANSparkMax(Constants.SHOOTOUT_ID);
 
-  public void start_rolling (double s){
-    SO_Motor.setSpeed(s);
+  public void start_rolling_high (double s){
+    SO_Motor_high.setSpeed(s);
   }
 
-  public void stop_rolling()
-  {
-    SO_Motor.stopMotor();
+  public void stop_rolling() {
+    SO_Motor_high.stopMotor();
   }
   /**
    * Creates a new ShootOut.

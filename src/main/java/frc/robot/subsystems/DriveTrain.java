@@ -3,11 +3,12 @@ package frc.robot.subsystems;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWMSparkMax;
-import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -52,6 +53,18 @@ public class DriveTrain extends SubsystemBase {
 
   public void arcadedrive(double movevalue, double rotatevalue){
     drive.arcadeDrive(movevalue, rotatevalue);
+  }
+
+  public void arcadedriveCustom(XboxController j, double L_Minus, double R_Minus)
+  {
+    double speed = -j.getRawAxis(1);
+    double turn = j.getRawAxis(4);
+
+    double left = (speed + turn) - L_Minus, 
+          right = (speed - turn) - R_Minus;
+
+          m_leftMotor.set(left);
+          m_rightMotor.set(right);
   }
 
   public void tankdrive(double left, double right){

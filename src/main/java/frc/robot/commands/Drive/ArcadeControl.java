@@ -9,6 +9,7 @@ package frc.robot.commands.Drive;
 
 import java.util.function.DoubleSupplier;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
@@ -16,13 +17,15 @@ public class ArcadeControl extends CommandBase {
   private final DriveTrain m_DriveTrain;
   private final DoubleSupplier m_speedvalue;
   private final DoubleSupplier m_rotatevalue;
+  private final XboxController joystick;
   /**
    * Creates a new Arcade command.
    */
-  public ArcadeControl(DriveTrain driveTrain, DoubleSupplier speed, DoubleSupplier rotatevalue) {
+  public ArcadeControl(XboxController x, DriveTrain driveTrain, DoubleSupplier speed, DoubleSupplier rotatevalue) {
     m_DriveTrain = driveTrain;
     m_speedvalue = speed;
     m_rotatevalue = rotatevalue;
+    joystick = x;
 
     addRequirements(m_DriveTrain);
   }
@@ -35,7 +38,8 @@ public class ArcadeControl extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_DriveTrain.arcadedrive(m_speedvalue.getAsDouble(), m_rotatevalue.getAsDouble());
+    //m_DriveTrain.arcadedrive(m_speedvalue.getAsDouble(), m_rotatevalue.getAsDouble());
+    m_DriveTrain.arcadedriveCustom(joystick, 0, 0);
   }
 
   // Called once the command ends or is interrupted.

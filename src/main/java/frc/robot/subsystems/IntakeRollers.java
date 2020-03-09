@@ -21,9 +21,11 @@ public class IntakeRollers extends SubsystemBase {
   private final PWMSparkMax High_v_Intake;
   private final PWMSparkMax Main_Intake;
 
+  private Spark highSO = new Spark(Constants.HIGH_SHOOTOUT_ID);
+
 
   // private final Spark Low_v_Intake = new Spark(Constants.LEFT_LOW_V_ROLLER_ID);
-  // private final Spark H_Band = new Spark(Constants.ROLLERS_H_ID);
+  // private final Spark H_Band = new Spasrk(Constants.ROLLERS_H_ID);
   // private final Spark High_v_Intake = new Spark(Constants.RIGHT_HIGH_V_ROLLER_ID);
   // private final Spark Main_Intake = new Spark(Constants.ROLLERS_V_INTAKE_MAIN_ID);
 
@@ -32,6 +34,13 @@ public class IntakeRollers extends SubsystemBase {
     H_Band = new PWMSparkMax(Constants.ROLLERS_H_ID);
     High_v_Intake = new PWMSparkMax(Constants.RIGHT_HIGH_V_ROLLER_ID);
     Main_Intake = new PWMSparkMax(Constants.ROLLERS_V_INTAKE_MAIN_ID);
+  }
+
+  public void soSetSpeed(double s){
+    highSO.setSpeed(s);
+  }
+  public double getSo_Speed(){
+    return highSO.getSpeed();
   }
 
   public void mainIntake(double s){

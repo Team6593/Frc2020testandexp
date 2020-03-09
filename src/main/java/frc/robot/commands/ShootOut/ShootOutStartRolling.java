@@ -31,7 +31,7 @@ public class ShootOutStartRolling extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    so.start_rolling(s);
+    so.start_rolling_high(s);
   }
 
   // Called once the command ends or is interrupted.
